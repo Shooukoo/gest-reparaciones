@@ -4,35 +4,82 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { addTicket } from "@/lib/firestoreService";
 import { NuevoTicket, TipoDispositivo, TipoServicio } from "@/types/ticket";
-import { Send, Loader2, Copy, Check, X, Ticket } from "lucide-react";
+import { Send, Loader2, Copy, Check, X, Ticket, GraduationCap, Info, MessageCircle } from "lucide-react";
 import CustomSelect from "./CustomSelect";
+
+const WA_NUMBER = "523531373007";
 
 const DISPOSITIVOS: TipoDispositivo[] = [
     "Laptop",
     "PC de Escritorio",
-    "Consola",
-    "Celular",
+    "Celular / Smartphone",
     "Tablet",
     "Otro",
 ];
 
-const SERVICIOS: TipoServicio[] = [
-    "Mantenimiento Preventivo",
-    "Mantenimiento Correctivo",
-    "Formateo e Instalación de SO",
-    "Instalación de Software",
-    "Reparación de Hardware",
-    "Reparación de Consola",
-    "Asesoría Técnica",
-    "Otro",
-];
+const SERVICIOS_POR_DISPOSITIVO: Record<TipoDispositivo, TipoServicio[]> = {
+    "Laptop": [
+        "Mantenimiento y Limpieza",
+        "Eliminación de Virus y Malware",
+        "Formateo e Instalación de Windows/Linux",
+        "Instalación de Software",
+        "Respaldo de Información",
+        "Recuperación de Datos",
+        "Actualización de Hardware (RAM/SSD)",
+        "Asesoría Técnica",
+        "Otro",
+    ],
+    "PC de Escritorio": [
+        "Mantenimiento y Limpieza",
+        "Eliminación de Virus y Malware",
+        "Formateo e Instalación de Windows/Linux",
+        "Instalación de Software",
+        "Respaldo de Información",
+        "Recuperación de Datos",
+        "Actualización de Hardware (RAM/SSD)",
+        "Armado de PC a la Medida",
+        "Asesoría Técnica",
+        "Otro",
+    ],
+    "Celular / Smartphone": [
+        "Mantenimiento de Celular",
+        "Formateo de Celular",
+        "Eliminación de Cuenta Google/KNOX",
+        "Asesoría Técnica",
+        "Otro",
+    ],
+    "Tablet": [
+        "Mantenimiento de Celular",
+        "Formateo de Celular",
+        "Eliminación de Cuenta Google/KNOX",
+        "Instalación de Software",
+        "Asesoría Técnica",
+        "Otro",
+    ],
+    "Otro": [
+        "Mantenimiento y Limpieza",
+        "Eliminación de Virus y Malware",
+        "Formateo e Instalación de Windows/Linux",
+        "Instalación de Software",
+        "Respaldo de Información",
+        "Recuperación de Datos",
+        "Actualización de Hardware (RAM/SSD)",
+        "Armado de PC a la Medida",
+        "Mantenimiento de Celular",
+        "Formateo de Celular",
+        "Eliminación de Cuenta Google/KNOX",
+        "Asesoría Técnica",
+        "Otro",
+    ],
+};
 
 const INITIAL_STATE: NuevoTicket = {
     clienteNombre: "",
     whatsapp: "",
     tipoDispositivo: "Laptop",
-    tipoServicio: "Mantenimiento Preventivo",
+    tipoServicio: "Mantenimiento y Limpieza",
     descripcionProblema: "",
+    esEstudiante: false,
 };
 
 const inputClass =
@@ -44,9 +91,11 @@ const labelClass =
 /* ─── Modal de código de ticket ─── */
 function TicketCodeModal({
     code,
+    isStudent,
     onClose,
 }: {
     code: string;
+    isStudent: boolean;
     onClose: () => void;
 }) {
     const [copied, setCopied] = useState(false);
@@ -57,6 +106,11 @@ function TicketCodeModal({
             setTimeout(() => setCopied(false), 2000);
         });
     }
+
+    const waMessage = encodeURIComponent(
+        `Hola, acabo de enviar una solicitud de servicio con el código *${code}*. Soy estudiante y quiero aplicar el descuento. Te adjunto mi documento académico.`
+    );
+    const waLink = `https://wa.me/${WA_NUMBER}?text=${waMessage}`;
 
     return (
         <div
@@ -89,7 +143,7 @@ function TicketCodeModal({
                 </p>
 
                 {/* Código */}
-                <div className="flex items-center gap-2 bg-zinc-950 border border-purple-500/30 rounded-xl px-4 py-3 mb-6">
+                <div className="flex items-center gap-2 bg-zinc-950 border border-purple-500/30 rounded-xl px-4 py-3 mb-4">
                     <span className="flex-1 font-mono text-lg font-bold text-purple-300 tracking-widest text-center">
                         {code}
                     </span>
@@ -105,6 +159,19 @@ function TicketCodeModal({
                         )}
                     </button>
                 </div>
+
+                {/* CTA WhatsApp para estudiante */}
+                {isStudent && (
+                    <a
+                        href={waLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 w-full bg-emerald-600/15 hover:bg-emerald-600/25 border border-emerald-500/30 text-emerald-400 font-semibold text-sm py-3 px-4 rounded-xl transition-all duration-200 mb-4"
+                    >
+                        <MessageCircle className="w-4 h-4 flex-shrink-0" />
+                        Enviar documento por WhatsApp
+                    </a>
+                )}
 
                 <p className="text-zinc-600 text-xs mb-6">
                     Visita{" "}
@@ -131,6 +198,7 @@ export default function RepairForm() {
     const [loading, setLoading] = useState(false);
     const [cooldown, setCooldown] = useState(false);
     const [ticketCode, setTicketCode] = useState<string | null>(null);
+    const [wasStudent, setWasStudent] = useState(false);
 
     function handleChange(
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -152,6 +220,7 @@ export default function RepairForm() {
         setLoading(true);
         try {
             const code = await addTicket(form);
+            setWasStudent(form.esEstudiante ?? false);
             setForm(INITIAL_STATE);
             setTicketCode(code);
             // Cooldown anti-spam: 30 s
@@ -171,6 +240,7 @@ export default function RepairForm() {
             {ticketCode && (
                 <TicketCodeModal
                     code={ticketCode}
+                    isStudent={wasStudent}
                     onClose={() => setTicketCode(null)}
                 />
             )}
@@ -220,7 +290,15 @@ export default function RepairForm() {
                         name="tipoDispositivo"
                         label="Tipo de dispositivo"
                         value={form.tipoDispositivo}
-                        onChange={handleSelect("tipoDispositivo")}
+                        onChange={(value) => {
+                            const newDevice = value as TipoDispositivo;
+                            const available = SERVICIOS_POR_DISPOSITIVO[newDevice];
+                            setForm((prev) => ({
+                                ...prev,
+                                tipoDispositivo: newDevice,
+                                tipoServicio: available[0],
+                            }));
+                        }}
                         options={DISPOSITIVOS}
                     />
 
@@ -231,7 +309,7 @@ export default function RepairForm() {
                         label="Tipo de servicio"
                         value={form.tipoServicio}
                         onChange={handleSelect("tipoServicio")}
-                        options={SERVICIOS}
+                        options={SERVICIOS_POR_DISPOSITIVO[form.tipoDispositivo]}
                     />
                 </div>
 
@@ -250,6 +328,49 @@ export default function RepairForm() {
                         placeholder="Ej: La laptop no enciende, hace un sonido extraño al inicio..."
                         className={`${inputClass} resize-none`}
                     />
+                </div>
+
+                {/* Descuento estudiantil */}
+                <div className="rounded-xl border border-white/8 bg-zinc-950/50 p-4 space-y-3">
+                    <label className="flex items-center gap-3 cursor-pointer select-none">
+                        <div className="relative flex-shrink-0">
+                            <input
+                                id="esEstudiante"
+                                type="checkbox"
+                                checked={form.esEstudiante ?? false}
+                                onChange={(e) =>
+                                    setForm((prev) => ({ ...prev, esEstudiante: e.target.checked }))
+                                }
+                                className="sr-only"
+                            />
+                            <div
+                                className={`w-5 h-5 rounded-md border transition-all duration-200 flex items-center justify-center ${form.esEstudiante
+                                    ? "bg-amber-500 border-amber-500"
+                                    : "bg-zinc-900 border-white/20"
+                                    }`}
+                            >
+                                <Check className={`w-3 h-3 text-zinc-900 transition-opacity ${form.esEstudiante ? "opacity-100" : "opacity-0"}`} />
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <GraduationCap className={`w-4 h-4 transition-colors ${form.esEstudiante ? "text-amber-400" : "text-zinc-500"}`} />
+                            <span className="text-sm font-semibold text-zinc-300">
+                                Soy estudiante — quiero el descuento de{" "}
+                                <span className="text-amber-400">$150 MXN</span>
+                            </span>
+                        </div>
+                    </label>
+
+                    {form.esEstudiante && (
+                        <div className="flex items-start gap-2 text-xs text-zinc-500 pt-1">
+                            <Info className="w-3.5 h-3.5 text-amber-500/70 flex-shrink-0 mt-0.5" />
+                            <p>
+                                Al enviar tu solicitud recibirás un enlace de WhatsApp para mandar tu{" "}
+                                <span className="text-zinc-300">carga académica, credencial o comprobante de inscripción</span>.
+                                El descuento se aplica tras verificar el documento.
+                            </p>
+                        </div>
+                    )}
                 </div>
 
                 <button

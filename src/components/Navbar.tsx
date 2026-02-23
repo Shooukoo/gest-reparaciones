@@ -5,10 +5,10 @@ import Link from "next/link";
 import { Menu, X, LayoutDashboard } from "lucide-react";
 
 const NAV_LINKS = [
-    { label: "Inicio", href: "#inicio" },
-    { label: "Servicios", href: "#servicios" },
+    { label: "Inicio", href: "/#inicio" },
+    { label: "Precios", href: "/#precios" },
     { label: "Estado", href: "/estado" },
-    { label: "Contacto", href: "#formulario" },
+    { label: "Contacto", href: "/#formulario" },
 ];
 
 export default function Navbar() {

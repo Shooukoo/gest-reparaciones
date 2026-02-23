@@ -5,18 +5,22 @@ export type TicketEstado = "Pendiente" | "En Proceso" | "Terminado";
 export type TipoDispositivo =
   | "Laptop"
   | "PC de Escritorio"
-  | "Consola"
-  | "Celular"
+  | "Celular / Smartphone"
   | "Tablet"
   | "Otro";
 
 export type TipoServicio =
-  | "Mantenimiento Preventivo"
-  | "Mantenimiento Correctivo"
-  | "Formateo e Instalación de SO"
+  | "Mantenimiento y Limpieza"
+  | "Eliminación de Virus y Malware"
+  | "Formateo e Instalación de Windows/Linux"
   | "Instalación de Software"
-  | "Reparación de Hardware"
-  | "Reparación de Consola"
+  | "Respaldo de Información"
+  | "Recuperación de Datos"
+  | "Actualización de Hardware (RAM/SSD)"
+  | "Armado de PC a la Medida"
+  | "Mantenimiento de Celular"
+  | "Formateo de Celular"
+  | "Eliminación de Cuenta Google/KNOX"
   | "Asesoría Técnica"
   | "Otro";
 
@@ -29,6 +33,7 @@ export interface Ticket {
   descripcionProblema: string;
   estado: TicketEstado;
   fecha: Timestamp;
+  esEstudiante?: boolean;
 }
 
 export type NuevoTicket = Omit<Ticket, "id" | "fecha" | "estado">;

@@ -36,6 +36,16 @@ export default function CustomSelect({
         return () => document.removeEventListener("mousedown", handleOutside);
     }, []);
 
+    // Bloquear scroll de la página mientras el dropdown está abierto
+    useEffect(() => {
+        if (open) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+        return () => { document.body.style.overflow = ""; };
+    }, [open]);
+
     return (
         <div ref={ref} className="relative">
             {label && (
@@ -75,7 +85,7 @@ export default function CustomSelect({
             {open && (
                 <ul
                     role="listbox"
-                    className="absolute z-50 mt-2 w-full bg-zinc-900 border border-white/10 rounded-xl shadow-2xl shadow-black/50 overflow-hidden animate-fade-in-up"
+                    className="absolute z-50 mt-2 w-full bg-zinc-900 border border-white/10 rounded-xl shadow-2xl shadow-black/50 overflow-y-auto max-h-60 animate-fade-in-up"
                     style={{ animationDuration: "0.15s" }}
                 >
                     {options.map((opt) => {
