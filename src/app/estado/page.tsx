@@ -32,18 +32,18 @@ const ESTADO_CONFIG = {
 };
 
 export default function EstadoPage() {
-    const [whatsapp, setWhatsapp] = useState("");
+    const [ticketCode, setTicketCode] = useState("");
     const [tickets, setTickets] = useState<Ticket[]>([]);
     const [searched, setSearched] = useState(false);
     const [loading, setLoading] = useState(false);
 
     async function handleSearch(e: React.FormEvent) {
         e.preventDefault();
-        if (!whatsapp.trim()) return;
+        if (!ticketCode.trim()) return;
         setLoading(true);
         setSearched(false);
         try {
-            const ticket = await getTicketByCode(whatsapp.trim());
+            const ticket = await getTicketByCode(ticketCode.trim());
             setTickets(ticket ? [ticket] : []);
         } finally {
             setSearched(true);
@@ -74,22 +74,22 @@ export default function EstadoPage() {
                         Estado de tu reparación
                     </h1>
                     <p className="text-zinc-500 text-sm sm:text-base">
-                        Ingresa el número de WhatsApp con el que registraste tu equipo.
+                        Ingresa el código de ticket que recibiste al registrarte.
                     </p>
                 </div>
 
                 {/* Search form */}
                 <form onSubmit={handleSearch} className="flex gap-2 mb-8">
                     <div className="relative flex-1">
-                        <label htmlFor="whatsapp" className="block text-xs font-semibold text-zinc-400 mb-1.5 uppercase tracking-wide">Código de ticket</label>
+                        <label htmlFor="ticketCode" className="block text-xs font-semibold text-zinc-400 mb-1.5 uppercase tracking-wide">Código de ticket</label>
                         <input
-                            id="whatsapp"
-                            name="whatsapp"
+                            id="ticketCode"
+                            name="ticketCode"
                             type="text"
                             required
-                            value={whatsapp}
-                            onChange={(e) => setWhatsapp(e.target.value)}
-                            placeholder="UIM-12345"
+                            value={ticketCode}
+                            onChange={(e) => setTicketCode(e.target.value)}
+                            placeholder="UIM-12345678"
                             className="w-full pl-4 pr-4 py-3.5 bg-zinc-900 border border-white/8 rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all text-sm"
                         />
                     </div>
@@ -120,7 +120,7 @@ export default function EstadoPage() {
                         <ClipboardList className="w-12 h-12 text-zinc-700 mx-auto mb-3" />
                         <p className="text-zinc-400 font-semibold">No encontramos tickets</p>
                         <p className="text-zinc-600 text-sm mt-1">
-                            Verifica que el número sea exactamente el que usaste al registrarte.
+                            Verifica que el código sea exactamente el que recibiste al registrarte.
                         </p>
                     </div>
                 )}
