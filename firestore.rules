@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /tickets/{ticketId} {
+
+      // CREAR: público, pero con validación de campos obligatorios
+      allow create: if
+        request.resource.data.keys().hasAll([
+          'clienteNombre', 'whatsapp', 'tipoDispositivo',
+          'tipoServicio', 'descripcionProblema', 'ticketCode'
+        ])
+        && request.resource.data.clienteNombre is string
+        && request.resource.data.clienteNombre.size() > 0
+        && request.resource.data.whatsapp is string
+        && request.resource.data.whatsapp.size() >= 7
+        && request.resource.data.descripcionProblema.size() > 0;
+
+      // READ: permite obtener un ticket por su ID (código) a cualquier usuario
+      // LIST (consulta de colección) solo para admins autenticados
+      allow get: if true;
+      allow list: if request.auth != null;
+
+      // UPDATE / DELETE: solo admin autenticado
+      allow update, delete: if request.auth != null;
+    }
+  }
+}
