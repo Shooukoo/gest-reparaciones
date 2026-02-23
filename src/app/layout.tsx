@@ -16,6 +16,11 @@ const BASE_URL = "https://uningenieromás.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
+  icons: {
+    icon: "/reparar.png",
+    shortcut: "/reparar.png",
+    apple: "/reparar.png",
+  },
   title: {
     default: "Un Ingeniero Más — Servicio Técnico Profesional",
     template: "%s | Un Ingeniero Más",
