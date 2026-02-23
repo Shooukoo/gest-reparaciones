@@ -12,3 +12,7 @@ export const metadata: Metadata = {
         canonical: "https://uningenieromás.com/estado",
     },
 };
+
+export default function EstadoLayout({ children }: { children: React.ReactNode }) {
+    return <>{children}</>;
+}
