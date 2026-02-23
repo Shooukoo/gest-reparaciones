@@ -14,6 +14,7 @@ const DISPOSITIVOS: TipoDispositivo[] = [
     "PC de Escritorio",
     "Celular / Smartphone",
     "Tablet",
+    "Consola",
     "Otro",
 ];
 
@@ -56,6 +57,12 @@ const SERVICIOS_POR_DISPOSITIVO: Record<TipoDispositivo, TipoServicio[]> = {
         "Asesoría Técnica",
         "Otro",
     ],
+    "Consola": [
+        "Mantenimiento y Limpieza",
+        "Actualización de Hardware (Consola)",
+        "Asesoría Técnica",
+        "Otro",
+    ],
     "Otro": [
         "Mantenimiento y Limpieza",
         "Eliminación de Virus y Malware",
@@ -64,6 +71,7 @@ const SERVICIOS_POR_DISPOSITIVO: Record<TipoDispositivo, TipoServicio[]> = {
         "Respaldo de Información",
         "Recuperación de Datos",
         "Actualización de Hardware (RAM/SSD)",
+        "Actualización de Hardware (Consola)",
         "Armado de PC a la Medida",
         "Mantenimiento de Celular",
         "Formateo de Celular",

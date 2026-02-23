@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Monitor, Smartphone, Sparkles, Tag, GraduationCap, ChevronDown, ChevronUp } from "lucide-react";
+import { Monitor, Smartphone, Sparkles, Tag, GraduationCap, ChevronDown, ChevronUp, Gamepad2 } from "lucide-react";
 
 /* ── Types ── */
 interface ServiceItem {
@@ -61,6 +61,11 @@ const TELEFONOS: ServiceItem[] = [
     { name: "Formateo completo de celular (restablecimiento de fábrica)", price: 200 },
     { name: "Eliminación de cuenta Google/KNOX", price: 300 },
     { name: "Creación de cuenta Google", price: "GRATIS" },
+];
+
+const CONSOLAS: ServiceItem[] = [
+    { name: "Mantenimiento y Limpieza", price: 350 },
+    { name: "Actualización de Hardware", price: 350 },
 ];
 
 const PROMOS: PromoItem[] = [
@@ -368,7 +373,7 @@ export default function PriceCatalog() {
                         ))}
                     </div>
 
-                    {/* ── Col 2: Extras + Teléfonos ── */}
+                    {/* ── Col 2: Extras + Teléfonos + Consolas ── */}
                     <div className="flex flex-col gap-6">
                         <div className="bg-zinc-900/60 border border-white/8 rounded-2xl p-6 flex-1">
                             <SectionHeader icon={Sparkles} title="Extras" subtitle="Servicios" />
@@ -378,6 +383,11 @@ export default function PriceCatalog() {
                         <div className="bg-zinc-900/60 border border-white/8 rounded-2xl p-6 flex-1">
                             <SectionHeader icon={Smartphone} title="Teléfonos" subtitle="Servicios en" />
                             <SimpleList items={TELEFONOS} student={student} />
+                        </div>
+
+                        <div className="bg-zinc-900/60 border border-white/8 rounded-2xl p-6 flex-1">
+                            <SectionHeader icon={Gamepad2} title="Consolas" subtitle="Servicios en" />
+                            <SimpleList items={CONSOLAS} student={student} />
                         </div>
                     </div>
 

@@ -7,6 +7,7 @@ export type TipoDispositivo =
   | "PC de Escritorio"
   | "Celular / Smartphone"
   | "Tablet"
+  | "Consola"
   | "Otro";
 
 export type TipoServicio =
@@ -17,6 +18,7 @@ export type TipoServicio =
   | "Respaldo de Información"
   | "Recuperación de Datos"
   | "Actualización de Hardware (RAM/SSD)"
+  | "Actualización de Hardware (Consola)"
   | "Armado de PC a la Medida"
   | "Mantenimiento de Celular"
   | "Formateo de Celular"
