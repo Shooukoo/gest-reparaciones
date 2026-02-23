@@ -12,7 +12,7 @@ const outfitFont = localFont({
   display: "swap",
 });
 
-const BASE_URL = "https://uningenieromás.com";
+const BASE_URL = "https://uningenieromas.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),

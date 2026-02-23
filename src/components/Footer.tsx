@@ -49,7 +49,7 @@ export default function Footer() {
                         <h4 className="text-white font-semibold mb-3 text-sm">Contacto</h4>
                         <div className="flex flex-col gap-3">
                             <a
-                                href="https://wa.me/523530000000"
+                                href="https://wa.me/523531373007"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-2 text-sm text-zinc-500 hover:text-purple-400 transition-colors"
@@ -58,7 +58,7 @@ export default function Footer() {
                                 WhatsApp
                             </a>
                             <a
-                                href="https://instagram.com"
+                                href="https://instagram.com/uningenieromas_"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-2 text-sm text-zinc-500 hover:text-purple-400 transition-colors"
