@@ -15,7 +15,7 @@ export default function Footer() {
                                 className="text-2xl font-bold tracking-tight select-none"
                             >
                                 <span className="text-purple-400">.</span>
-                                <span className="text-white">uningenierómás</span>
+                                <span className="text-white">uningenieromás</span>
                             </a>
                         </div>
                         <p className="text-zinc-500 text-sm leading-relaxed">
