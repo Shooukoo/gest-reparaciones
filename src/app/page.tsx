@@ -91,12 +91,13 @@ export default function Home() {
               </span>
             </h1>
             <p className="text-xl sm:text-2xl lg:text-3xl text-zinc-400 font-light mb-6">
-              para resolver lo que sea.
+              Para resolver lo que sea.
             </p>
 
             <p className="text-zinc-400 text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
-              Diagnóstico rápido, precios justos y soluciones reales. Laptops,
-              consolas e instalaciones — sin excusas, sin letra pequeña.
+              Diagnóstico rápido, precios justos y soluciones reales. Hecho por
+              y para estudiahambres: Laptops, consolas e instalaciones. Sin
+              excusas, sin letra pequeña y sin dejarte sin comer.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3">

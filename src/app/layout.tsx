@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     siteName: "Un Ingeniero Más",
     title: "Un Ingeniero Más — Servicio Técnico Profesional",
     description:
-      "Reparación de laptops, consolas, celulares e instalación de software. Diagnóstico rápido y soluciones reales.",
+      "Diagnóstico rápido, precios justos y soluciones reales. Hecho por y para estudiahambres: Laptops, consolas e instalaciones. Sin excusas, sin letra pequeña y sin dejarte sin comer.",
     images: [
       {
         url: "/og-image.png",
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Un Ingeniero Más — Servicio Técnico Profesional",
     description:
-      "Reparación de laptops, consolas, celulares e instalación de software. Diagnóstico rápido.",
+      "Diagnóstico rápido, precios justos y soluciones reales. Hecho por y para estudiahambres: Laptops, consolas e instalaciones. Sin excusas, sin letra pequeña y sin dejarte sin comer.",
     images: ["/og-image.png"],
   },
   alternates: {
