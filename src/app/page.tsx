@@ -96,8 +96,8 @@ export default function Home() {
 
             <p className="text-zinc-400 text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
               Diagnóstico rápido, precios justos y soluciones reales. Hecho por
-              y para estudiahambres: Laptops, consolas e instalaciones. Sin
-              excusas, sin letra pequeña y sin dejarte sin comer.
+              y para estudihambres: Laptops, consolas e instalaciones. Sin
+              excusas, sin letras pequeñas y sin dejarte sin comer.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3">
