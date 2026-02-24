@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, LayoutDashboard } from "lucide-react";
+import { Menu, X, LayoutDashboard, TrendingUp } from "lucide-react";
 
 const NAV_LINKS = [
     { label: "Inicio", href: "/#inicio" },
@@ -39,6 +39,14 @@ export default function Navbar() {
                             </a>
                         ))}
                         <Link
+                            href="/ahorros"
+                            className="relative flex items-center gap-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 hover:border-emerald-400/60 text-emerald-400 hover:text-emerald-300 text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-200 group"
+                        >
+                            <TrendingUp className="w-4 h-4" />
+                            Ahorros
+                            <span className="ml-1 text-[10px] font-bold bg-emerald-500 text-white px-1.5 py-0.5 rounded-full leading-none">NEW</span>
+                        </Link>
+                        <Link
                             href="/dashboard"
                             className="flex items-center gap-1.5 bg-purple-600 hover:bg-purple-500 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-200"
                         >
@@ -70,6 +78,15 @@ export default function Navbar() {
                                 {link.label}
                             </a>
                         ))}
+                        <Link
+                            href="/ahorros"
+                            onClick={() => setIsOpen(false)}
+                            className="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-semibold px-4 py-2.5 rounded-lg mt-1 text-sm"
+                        >
+                            <TrendingUp className="w-4 h-4" />
+                            Ahorros
+                            <span className="ml-auto text-[10px] font-bold bg-emerald-500 text-white px-1.5 py-0.5 rounded-full leading-none">NEW</span>
+                        </Link>
                         <Link
                             href="/dashboard"
                             onClick={() => setIsOpen(false)}

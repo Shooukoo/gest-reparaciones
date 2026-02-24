@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/ahorros/(.*)",
+      "destination": "https://ahorros-personales.vercel.app/$1"
+    },
+    {
+      "source": "/ahorros",
+      "destination": "https://ahorros-personales.vercel.app"
+    },
+    {
+      "source": "/((?!ahorros).*)",
+      "destination": "/$1"
+    }
+  ]
+}
