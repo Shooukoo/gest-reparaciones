@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ChevronRight, ShieldCheck, Zap, Clock, CheckCircle2, XCircle, TrendingUp, PiggyBank, BarChart3, Wallet } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Inicio",
+  title: { absolute: "Un Ingeniero Más — Servicio Técnico Profesional" },
   description:
     "Servicio técnico profesional: reparación de laptops, consolas, celulares y más. Diagnóstico rápido, piezas originales y garantía. ¡Agenda tu cita hoy!",
   alternates: {
