@@ -199,8 +199,8 @@ export default function Home() {
               </div>
 
               {/* Right — mock UI preview */}
-              <div className="w-full lg:w-auto lg:flex-shrink-0 flex justify-center">
-                <div className="w-full max-w-xs bg-zinc-900/80 border border-white/10 rounded-xl overflow-hidden shadow-2xl">
+              <div className="w-full lg:w-96 lg:flex-shrink-0">
+                <div className="w-full bg-zinc-900/80 border border-white/10 rounded-xl overflow-hidden shadow-2xl">
                   {/* Header bar */}
                   <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-zinc-900">
                     <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -212,7 +212,7 @@ export default function Home() {
                     <p className="text-2xl font-black text-white">$4,250.<span className="text-zinc-400 text-lg">00</span></p>
                   </div>
                   {/* Mini bars */}
-                  <div className="px-4 pb-4 flex items-end gap-1.5 h-16">
+                  <div className="px-5 pb-5 flex items-end gap-2 h-24">
                     {[30, 55, 40, 72, 50, 85, 60].map((h, i) => (
                       <div
                         key={i}
@@ -231,7 +231,7 @@ export default function Home() {
                       { label: "Sueldo", amount: "+$2,000", color: "text-emerald-400" },
                       { label: "Netflix", amount: "-$299", color: "text-red-400" },
                     ].map(({ label, amount, color }) => (
-                      <div key={label} className="flex items-center justify-between px-4 py-2.5 hover:bg-white/5 transition-colors">
+                      <div key={label} className="flex items-center justify-between px-5 py-3 hover:bg-white/5 transition-colors">
                         <span className="text-xs text-zinc-400">{label}</span>
                         <span className={`text-xs font-bold ${color}`}>{amount}</span>
                       </div>
