@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s | Un Ingeniero Más",
   },
   description:
-    "Reparación de laptops, consolas, celulares e instalación de software en Guatemala. Diagnóstico rápido, piezas originales y garantía en cada servicio.",
+    "Reparación de laptops, consolas, celulares e instalación de software en Sahuayo, Mich. México. Diagnóstico rápido, piezas originales y garantía en cada servicio.",
   keywords: [
     "reparación laptops",
     "servicio técnico",
@@ -35,11 +35,11 @@ export const metadata: Metadata = {
     "instalación software",
     "mantenimiento computadoras",
     "reparación celulares",
-    "servicio técnico Guatemala",
+    "servicio técnico Sahuayo, Mich. México",
   ],
   authors: [{ name: "Un Ingeniero Más" }],
-  creator: "Un Ingeniero Más",
-  publisher: "Un Ingeniero Más",
+  creator: "Santiago Nuñez",
+  publisher: "Santiago Nuñez",
   robots: {
     index: true,
     follow: true,
@@ -53,12 +53,12 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "es_GT",
+    locale: "es_MX",
     url: BASE_URL,
     siteName: "Un Ingeniero Más",
     title: "Un Ingeniero Más — Servicio Técnico Profesional",
     description:
-      "Diagnóstico rápido, precios justos y soluciones reales. Hecho por y para estudiahambres: Laptops, consolas e instalaciones. Sin excusas, sin letra pequeña y sin dejarte sin comer.",
+      "Diagnóstico rápido, precios justos y soluciones reales. Hecho por y para estudiahambres: Laptops, consolas e instalaciones. Sin excusas, sin letras pequeñas y sin dejarte sin comer.",
     images: [
       {
         url: "/og-image.png",
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Un Ingeniero Más — Servicio Técnico Profesional",
     description:
-      "Diagnóstico rápido, precios justos y soluciones reales. Hecho por y para estudiahambres: Laptops, consolas e instalaciones. Sin excusas, sin letra pequeña y sin dejarte sin comer.",
+      "Diagnóstico rápido, precios justos y soluciones reales. Hecho por y para estudiahambres: Laptops, consolas e instalaciones. Sin excusas, sin letras pequeñas y sin dejarte sin comer.",
     images: ["/og-image.png"],
   },
   alternates: {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import RepairForm from "@/components/RepairForm";
 import PriceCatalog from "@/components/PriceCatalog";
-import { ChevronRight, ShieldCheck, Zap, Clock } from "lucide-react";
+import { ChevronRight, ShieldCheck, Zap, Clock, CheckCircle2, XCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Inicio",
@@ -167,6 +167,48 @@ export default function Home() {
             </p>
           </div>
           <RepairForm />
+        </div>
+      </section>
+
+      {/* ── GARANTÍAS ───────────────────────────────── */}
+      <section id="garantias" className="py-16 sm:py-24 border-t border-white/5">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span className="inline-flex items-center gap-1.5 bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-4">
+            <ShieldCheck className="w-3.5 h-3.5" />
+            Garantías
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4">
+            Tu tranquilidad,{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-violet-300">
+              garantizada
+            </span>
+          </h2>
+          <p className="text-zinc-400 text-sm sm:text-base mb-10">
+            Todos nuestros servicios incluyen garantía. Estas son las condiciones aplicables.
+          </p>
+
+          <ul className="flex flex-col gap-3 text-left">
+            {[
+              { ok: true, text: "7 días de garantía en todos los servicios realizados" },
+              { ok: true, text: "Aplicable solo a problemas relacionados con el trabajo entregado" },
+              { ok: true, text: "Revisión sin costo dentro del plazo de garantía" },
+              { ok: false, text: "No cubre virus nuevos, daños físicos o mal uso del equipo" },
+              { ok: false, text: "Garantía no aplicable si el sistema fue modificado por terceros" },
+            ].map(({ ok, text }) => (
+              <li
+                key={text}
+                className={`flex items-start gap-3 rounded-xl px-5 py-4 text-sm sm:text-base font-medium border ${ok
+                  ? "bg-purple-500/10 border-purple-500/20 text-purple-200"
+                  : "bg-red-500/10 border-red-500/20 text-red-300"
+                  }`}
+              >
+                {ok
+                  ? <CheckCircle2 className="w-5 h-5 mt-0.5 shrink-0 text-purple-400" />
+                  : <XCircle className="w-5 h-5 mt-0.5 shrink-0 text-red-400" />}
+                {text}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </div>
