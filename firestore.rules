@@ -23,5 +23,19 @@ service cloud.firestore {
       // UPDATE / DELETE: solo admin autenticado
       allow update, delete: if request.auth != null;
     }
+
+    // Contactos del portafolio
+    match /portfolio_contacts/{docId} {
+      allow create: if
+        request.resource.data.keys().hasAll(['name', 'whatsapp', 'subject', 'message'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 2
+        && request.resource.data.whatsapp is string
+        && request.resource.data.whatsapp.size() >= 7
+        && request.resource.data.message is string
+        && request.resource.data.message.size() >= 20;
+      // Solo admins autenticados pueden leer/eliminar contactos
+      allow read, delete: if request.auth != null;
+    }
   }
 }

@@ -4,7 +4,12 @@ import { useEffect, useState } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useAuth } from "@/context/AuthContext";
-import { subscribeToTickets } from "@/lib/firestoreService";
+import {
+    subscribeToTickets,
+    subscribeToPortfolioContacts,
+    deletePortfolioContact,
+    PortfolioContact,
+} from "@/lib/firestoreService";
 import { Ticket, TicketEstado } from "@/types/ticket";
 import TicketRow from "@/components/TicketRow";
 import toast from "react-hot-toast";
@@ -16,6 +21,11 @@ import {
     Loader2,
     Search,
     LogOut,
+    Mail,
+    Phone,
+    Tag,
+    Trash2,
+    Inbox,
 } from "lucide-react";
 
 const FILTROS: { label: string; value: "Todos" | TicketEstado }[] = [
@@ -38,6 +48,10 @@ export default function DashboardPage() {
     const [filtro, setFiltro] = useState<"Todos" | TicketEstado>("Todos");
     const [busqueda, setBusqueda] = useState("");
 
+    // Portfolio contacts state
+    const [contacts, setContacts] = useState<PortfolioContact[]>([]);
+    const [contactsLoading, setContactsLoading] = useState(true);
+
     async function handleLogout() {
         try {
             await signOut(auth);
@@ -54,6 +68,23 @@ export default function DashboardPage() {
         });
         return () => unsub();
     }, []);
+
+    useEffect(() => {
+        const unsub = subscribeToPortfolioContacts((data) => {
+            setContacts(data);
+            setContactsLoading(false);
+        });
+        return () => unsub();
+    }, []);
+
+    async function handleDeleteContact(id: string) {
+        try {
+            await deletePortfolioContact(id);
+            toast.success("Contacto eliminado.");
+        } catch {
+            toast.error("Error al eliminar el contacto.");
+        }
+    }
 
     const filtrados = tickets.filter((t) => {
         const matchFiltro = filtro === "Todos" || t.estado === filtro;
@@ -215,6 +246,104 @@ export default function DashboardPage() {
                         </div>
                     )}
                 </div>
+
+                {/* ── Portfolio Contacts ────────────────────────────────────── */}
+                <div className="mt-12">
+                    <div className="flex items-center gap-3 mb-6">
+                        <div className="w-8 h-8 rounded-lg bg-indigo-500/15 flex items-center justify-center flex-shrink-0">
+                            <Mail className="w-4 h-4 text-indigo-400" />
+                        </div>
+                        <div>
+                            <h2 className="text-lg font-bold text-white leading-none">
+                                Contactos del Portafolio
+                            </h2>
+                            <p className="text-zinc-500 text-xs mt-0.5">
+                                Mensajes recibidos a través del formulario de contacto del portafolio
+                            </p>
+                        </div>
+                        {!contactsLoading && (
+                            <span className="ml-auto text-xs font-semibold bg-indigo-500/15 text-indigo-400 px-2.5 py-1 rounded-full">
+                                {contacts.length}
+                            </span>
+                        )}
+                    </div>
+
+                    {contactsLoading ? (
+                        <div className="flex flex-col items-center justify-center py-16 text-zinc-600 bg-zinc-900 border border-white/8 rounded-2xl">
+                            <Loader2 className="w-7 h-7 animate-spin mb-3 text-indigo-500" />
+                            <p className="text-sm">Cargando contactos...</p>
+                        </div>
+                    ) : contacts.length === 0 ? (
+                        <div className="flex flex-col items-center justify-center py-16 text-zinc-600 bg-zinc-900 border border-white/8 rounded-2xl">
+                            <Inbox className="w-10 h-10 mb-3 text-zinc-800" />
+                            <p className="text-base font-semibold text-zinc-500">Sin mensajes aún</p>
+                            <p className="text-sm mt-1 text-zinc-600">
+                                Los mensajes del portafolio aparecerán aquí en tiempo real.
+                            </p>
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                            {contacts.map((contact) => {
+                                const date = contact.fecha?.toDate?.();
+                                const formattedDate = date
+                                    ? new Intl.DateTimeFormat("es-MX", {
+                                        day: "2-digit",
+                                        month: "short",
+                                        year: "numeric",
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                    }).format(date)
+                                    : null;
+
+                                return (
+                                    <div
+                                        key={contact.id}
+                                        className="bg-zinc-900 border border-white/8 rounded-2xl p-5 flex flex-col gap-3 group"
+                                    >
+                                        {/* Top row: name + delete */}
+                                        <div className="flex items-start justify-between gap-2">
+                                            <p className="font-semibold text-white text-sm leading-snug">
+                                                {contact.name}
+                                            </p>
+                                            <button
+                                                onClick={() => handleDeleteContact(contact.id)}
+                                                title="Eliminar"
+                                                className="opacity-0 group-hover:opacity-100 flex-shrink-0 p-1.5 rounded-lg text-zinc-600 hover:text-red-400 hover:bg-red-500/10 transition-all duration-200"
+                                            >
+                                                <Trash2 className="w-3.5 h-3.5" />
+                                            </button>
+                                        </div>
+
+                                        {/* Meta: whatsapp + subject */}
+                                        <div className="flex flex-col gap-1.5">
+                                            <div className="flex items-center gap-2 text-zinc-400 text-xs">
+                                                <Phone className="w-3.5 h-3.5 text-zinc-600 flex-shrink-0" />
+                                                <span className="font-mono">{contact.whatsapp}</span>
+                                            </div>
+                                            <div className="flex items-center gap-2 text-zinc-400 text-xs">
+                                                <Tag className="w-3.5 h-3.5 text-zinc-600 flex-shrink-0" />
+                                                <span className="truncate">{contact.subject}</span>
+                                            </div>
+                                        </div>
+
+                                        {/* Message */}
+                                        <p className="text-zinc-400 text-xs leading-relaxed line-clamp-4 bg-zinc-950/50 rounded-xl px-3 py-2.5 border border-white/5">
+                                            {contact.message}
+                                        </p>
+
+                                        {/* Date */}
+                                        {formattedDate && (
+                                            <p className="text-zinc-600 text-xs mt-auto">
+                                                {formattedDate}
+                                            </p>
+                                        )}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
+                </div>
+                {/* ─────────────────────────────────────────────────────────── */}
             </div>
         </div>
     );

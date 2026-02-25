@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import RepairForm from "@/components/RepairForm";
 import PriceCatalog from "@/components/PriceCatalog";
 import Link from "next/link";
-import { ChevronRight, ShieldCheck, Zap, Clock, CheckCircle2, XCircle, TrendingUp, PiggyBank, BarChart3, Wallet } from "lucide-react";
+import { ChevronRight, ShieldCheck, Zap, Clock, CheckCircle2, XCircle, TrendingUp, PiggyBank, BarChart3, Wallet, Star, Package, Tag, BookOpen, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: { absolute: "Un Ingeniero Más — Servicio Técnico Profesional" },
@@ -146,6 +146,107 @@ export default function Home() {
                 {label}
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── APP CATÁLOGO / PORTFOLIO ──────────────── */}
+      <section className="py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Featured label above card */}
+          <div className="flex justify-center mb-5">
+            <span className="inline-flex items-center gap-2 bg-amber-500/15 border border-amber-500/30 text-amber-400 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest">
+              <Star className="w-3.5 h-3.5 fill-amber-400" />
+              Proyecto destacado
+            </span>
+          </div>
+
+          <div className="relative rounded-3xl overflow-hidden border border-amber-500/25 bg-gradient-to-br from-amber-950/70 via-orange-950/40 to-zinc-950 shadow-2xl shadow-amber-900/20">
+            {/* Decorative glows */}
+            <div className="absolute -top-24 right-0 w-96 h-96 bg-amber-500/15 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute -bottom-16 -left-8 w-72 h-72 bg-orange-500/10 rounded-full blur-[90px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-yellow-500/5 rounded-full blur-[60px] pointer-events-none" />
+
+            {/* Top accent line */}
+            <div className="h-1 w-full bg-gradient-to-r from-amber-500 via-orange-400 to-yellow-400" />
+
+            <div className="relative z-10 flex flex-col lg:flex-row items-center gap-10 p-8 sm:p-12">
+              {/* Left content */}
+              <div className="flex-1 text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 bg-amber-500/15 border border-amber-500/30 text-amber-400 text-xs font-bold px-3 py-1.5 rounded-full mb-5 uppercase tracking-wider">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                  Disponible ahora
+                </div>
+
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 leading-tight">
+                  Apps que{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-300 to-yellow-300">
+                    resuelven problemas reales
+                  </span>
+                </h2>
+
+                <p className="text-zinc-300 text-base sm:text-lg mb-7 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                  Portfolio de desarrollo de software: apps web, sistemas a medida y herramientas que usas todos los días. Mira lo que puedo construir para ti.
+                </p>
+
+                {/* Feature chips */}
+                <div className="flex flex-wrap gap-2 justify-center lg:justify-start mb-8">
+                  {[
+                    { icon: Package, label: "Apps web" },
+                    { icon: Zap, label: "Tiempo real" },
+                    { icon: BookOpen, label: "Proyectos reales" },
+                  ].map(({ icon: Icon, label }) => (
+                    <span key={label} className="flex items-center gap-1.5 bg-white/8 border border-white/10 text-zinc-200 text-xs font-semibold px-3 py-1.5 rounded-lg">
+                      <Icon className="w-3.5 h-3.5 text-amber-400" />
+                      {label}
+                    </span>
+                  ))}
+                </div>
+
+                <Link
+                  href="/catalogo"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-400 hover:from-amber-400 hover:to-orange-300 text-black font-black px-7 py-4 rounded-xl transition-all duration-200 shadow-xl shadow-amber-900/50 hover:-translate-y-1 hover:shadow-amber-800/60 text-sm sm:text-base"
+                >
+                  Ver portfolio
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+
+              {/* Right — mock portfolio UI */}
+              <div className="w-full lg:w-[420px] lg:flex-shrink-0">
+                <div className="w-full bg-zinc-900/90 border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
+                  {/* Header */}
+                  <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/8 bg-zinc-900">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                      <span className="text-xs font-bold text-white">Portfolio — Proyectos</span>
+                    </div>
+                    <span className="text-[10px] text-zinc-500 bg-white/5 px-2 py-0.5 rounded-md">4 apps</span>
+                  </div>
+                  {/* Project cards */}
+                  <div className="px-4 py-3 flex flex-col gap-2.5">
+                    {[
+                      { name: "Gest. Reparaciones", desc: "Tickets en tiempo real · Firebase", tag: "Web App", tagColor: "text-amber-400 bg-amber-500/10 border-amber-500/20" },
+                      { name: "Ahorros Personales", desc: "Finanzas · Gráficas · Metas", tag: "Web App", tagColor: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20" },
+                      { name: "Portfolio", desc: "Este sitio · Next.js · Vercel", tag: "En vivo", tagColor: "text-blue-400 bg-blue-500/10 border-blue-500/20" },
+                    ].map(({ name, desc, tag, tagColor }) => (
+                      <div key={name} className="flex items-center justify-between bg-white/4 hover:bg-white/7 transition-colors border border-white/6 rounded-xl px-4 py-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-lg bg-amber-500/15 border border-amber-500/20 flex items-center justify-center flex-shrink-0">
+                            <Package className="w-3.5 h-3.5 text-amber-400" />
+                          </div>
+                          <div>
+                            <p className="text-xs font-semibold text-white leading-none mb-0.5">{name}</p>
+                            <p className="text-[10px] text-zinc-500">{desc}</p>
+                          </div>
+                        </div>
+                        <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border flex-shrink-0 ${tagColor}`}>{tag}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

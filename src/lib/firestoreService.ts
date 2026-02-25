@@ -11,6 +11,7 @@ import {
   updateDoc,
   setDoc,
   getDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import { db } from "./firebase";
 import { NuevoTicket, Ticket, TicketEstado } from "@/types/ticket";
@@ -87,4 +88,41 @@ export async function getTicketsByWhatsapp(whatsapp: string): Promise<Ticket[]> 
     id: docSnap.id,
     ...(docSnap.data() as Omit<Ticket, "id">),
   }));
+}
+
+// ─── Portfolio Contacts ───────────────────────────────────────────────────────
+
+export interface PortfolioContact {
+  id: string;
+  name: string;
+  whatsapp: string;
+  subject: string;
+  message: string;
+  fecha?: { toDate: () => Date } | null;
+}
+
+/**
+ * Escucha contactos del portafolio en tiempo real.
+ */
+export function subscribeToPortfolioContacts(
+  callback: (contacts: PortfolioContact[]) => void
+): () => void {
+  const q = query(
+    collection(db, "portfolio_contacts"),
+    orderBy("fecha", "desc")
+  );
+  return onSnapshot(q, (snapshot) => {
+    const contacts: PortfolioContact[] = snapshot.docs.map((docSnap) => ({
+      id: docSnap.id,
+      ...(docSnap.data() as Omit<PortfolioContact, "id">),
+    }));
+    callback(contacts);
+  });
+}
+
+/**
+ * Elimina un contacto del portafolio.
+ */
+export async function deletePortfolioContact(id: string): Promise<void> {
+  await deleteDoc(doc(db, "portfolio_contacts", id));
 }
