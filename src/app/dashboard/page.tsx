@@ -249,23 +249,25 @@ export default function DashboardPage() {
 
                 {/* ── Portfolio Contacts ────────────────────────────────────── */}
                 <div className="mt-12">
-                    <div className="flex items-center gap-3 mb-6">
-                        <div className="w-8 h-8 rounded-lg bg-indigo-500/15 flex items-center justify-center flex-shrink-0">
+                    <div className="flex items-start gap-3 mb-6">
+                        <div className="w-8 h-8 rounded-lg bg-indigo-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
                             <Mail className="w-4 h-4 text-indigo-400" />
                         </div>
-                        <div>
-                            <h2 className="text-lg font-bold text-white leading-none">
-                                Contactos del Portafolio
-                            </h2>
-                            <p className="text-zinc-500 text-xs mt-0.5">
+                        <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2">
+                                <h2 className="text-lg font-bold text-white leading-none">
+                                    Contactos del Portafolio
+                                </h2>
+                                {!contactsLoading && (
+                                    <span className="text-xs font-semibold bg-indigo-500/15 text-indigo-400 px-2.5 py-1 rounded-full flex-shrink-0">
+                                        {contacts.length}
+                                    </span>
+                                )}
+                            </div>
+                            <p className="text-zinc-500 text-xs mt-1 leading-relaxed">
                                 Mensajes recibidos a través del formulario de contacto del portafolio
                             </p>
                         </div>
-                        {!contactsLoading && (
-                            <span className="ml-auto text-xs font-semibold bg-indigo-500/15 text-indigo-400 px-2.5 py-1 rounded-full">
-                                {contacts.length}
-                            </span>
-                        )}
                     </div>
 
                     {contactsLoading ? (
@@ -284,7 +286,7 @@ export default function DashboardPage() {
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                             {contacts.map((contact) => {
-                                const date = contact.fecha?.toDate?.();
+                                const date = contact.createdAt?.toDate?.();
                                 const formattedDate = date
                                     ? new Intl.DateTimeFormat("es-MX", {
                                         day: "2-digit",

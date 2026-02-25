@@ -98,7 +98,7 @@ export interface PortfolioContact {
   whatsapp: string;
   subject: string;
   message: string;
-  fecha?: { toDate: () => Date } | null;
+  createdAt?: { toDate: () => Date } | null;
 }
 
 /**
@@ -109,7 +109,7 @@ export function subscribeToPortfolioContacts(
 ): () => void {
   const q = query(
     collection(db, "portfolio_contacts"),
-    orderBy("fecha", "desc")
+    orderBy("createdAt", "desc")
   );
   return onSnapshot(q, (snapshot) => {
     const contacts: PortfolioContact[] = snapshot.docs.map((docSnap) => ({
