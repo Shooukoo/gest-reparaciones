@@ -9,12 +9,12 @@
       "destination": "https://ahorros-personales.vercel.app"
     },
     {
-      "source": "/catalogo/(.*)",
-      "destination": "https://catalogo-servicios-web.vercel.app/$1"
+      "source": "/catalogo/:path*",
+      "destination": "https://catalogo-servicios-web.vercel.app/catalogo/:path*"
     },
     {
       "source": "/catalogo",
-      "destination": "https://catalogo-servicios-web.vercel.app"
+      "destination": "https://catalogo-servicios-web.vercel.app/catalogo"
     },
     {
       "source": "/((?!ahorros|catalogo).*)",
