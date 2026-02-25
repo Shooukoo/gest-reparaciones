@@ -61,7 +61,7 @@ export default function Home() {
       {/* ── HERO ─────────────────────────────────── */}
       <section
         id="inicio"
-        className="relative flex items-center min-h-[calc(100svh-80px)] py-16 sm:py-20"
+        className="relative flex items-start sm:items-center min-h-[calc(100svh-80px)] pt-10 pb-16 sm:py-20"
       >
         {/* Grid background */}
         <div
@@ -91,11 +91,11 @@ export default function Home() {
                 Más
               </span>
             </h1>
-            <p className="text-[clamp(1.1rem,3vw,1.875rem)] text-zinc-400 font-light mb-6">
+            <p className="text-[clamp(1rem,2.5vw,1.5rem)] text-zinc-400 font-light mb-6">
               Para resolver lo que sea.
             </p>
 
-            <p className="text-zinc-400 text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
+            <p className="text-zinc-400 text-sm sm:text-base leading-relaxed mb-8 max-w-xl">
               Diagnóstico rápido, precios justos y soluciones reales. Hecho por
               y para estudihambres: Laptops, consolas e instalaciones. Sin
               excusas, sin letras pequeñas y sin dejarte sin comer.
@@ -151,7 +151,7 @@ export default function Home() {
       </section>
 
       {/* ── APP CATÁLOGO / PORTFOLIO ──────────────── */}
-      <section className="py-12 sm:py-16">
+      <section className="py-8 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Featured label above card */}
           <div className="flex justify-center mb-5">
@@ -170,7 +170,7 @@ export default function Home() {
             {/* Top accent line */}
             <div className="h-1 w-full bg-gradient-to-r from-amber-500 via-orange-400 to-yellow-400" />
 
-            <div className="relative z-10 flex flex-col lg:flex-row items-center gap-10 p-8 sm:p-12">
+            <div className="relative z-10 flex flex-col lg:flex-row items-center gap-6 sm:gap-10 p-5 sm:p-8 lg:p-12">
               {/* Left content */}
               <div className="flex-1 text-center lg:text-left">
                 <div className="inline-flex items-center gap-2 bg-amber-500/15 border border-amber-500/30 text-amber-400 text-xs font-bold px-3 py-1.5 rounded-full mb-5 uppercase tracking-wider">
@@ -178,14 +178,14 @@ export default function Home() {
                   Disponible ahora
                 </div>
 
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 leading-tight">
+                <h2 className="text-[clamp(1.6rem,5vw,3rem)] font-black text-white mb-3 leading-tight">
                   Apps que{" "}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-300 to-yellow-300">
                     resuelven problemas reales
                   </span>
                 </h2>
 
-                <p className="text-zinc-300 text-base sm:text-lg mb-7 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                <p className="text-zinc-300 text-sm sm:text-base mb-6 max-w-lg mx-auto lg:mx-0 leading-relaxed">
                   Portfolio de desarrollo de software: apps web, sistemas a medida y herramientas que usas todos los días. Mira lo que puedo construir para ti.
                 </p>
 
@@ -212,8 +212,8 @@ export default function Home() {
                 </Link>
               </div>
 
-              {/* Right — mock portfolio UI */}
-              <div className="w-full lg:w-[420px] lg:flex-shrink-0">
+              {/* Right — mock portfolio UI — hidden on mobile */}
+              <div className="hidden sm:block w-full lg:w-[420px] lg:flex-shrink-0">
                 <div className="w-full bg-zinc-900/90 border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
                   {/* Header */}
                   <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/8 bg-zinc-900">
@@ -252,27 +252,27 @@ export default function Home() {
       </section>
 
       {/* ── APP AHORROS ─────────────────────────────── */}
-      <section className="py-10 sm:py-14">
+      <section className="py-6 sm:py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative rounded-2xl overflow-hidden border border-emerald-500/20 bg-gradient-to-br from-emerald-950/60 via-zinc-900/80 to-zinc-950">
             {/* Glow */}
             <div className="absolute -top-20 -right-20 w-64 h-64 bg-emerald-500/10 rounded-full blur-[80px] pointer-events-none" />
             <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-teal-500/8 rounded-full blur-[60px] pointer-events-none" />
 
-            <div className="relative z-10 flex flex-col lg:flex-row items-center gap-8 p-8 sm:p-10">
+            <div className="relative z-10 flex flex-col lg:flex-row items-center gap-6 p-5 sm:p-10">
               {/* Left content */}
               <div className="flex-1 text-center lg:text-left">
                 <div className="inline-flex items-center gap-2 bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-bold px-3 py-1.5 rounded-full mb-4 uppercase tracking-wider">
                   <TrendingUp className="w-3 h-3" />
                   Nuevo proyecto
                 </div>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-3 leading-tight">
+                <h2 className="text-[clamp(1.5rem,4.5vw,2.5rem)] font-black text-white mb-2 leading-tight">
                   Controla tus{" "}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">
                     ahorros personales
                   </span>
                 </h2>
-                <p className="text-zinc-400 text-sm sm:text-base mb-6 max-w-md mx-auto lg:mx-0">
+                <p className="text-zinc-400 text-sm mb-5 max-w-md mx-auto lg:mx-0">
                   Registra ingresos y gastos, visualiza tu progreso y mantén el control de tu dinero. Simple, rápido y sin complicaciones.
                 </p>
 
@@ -299,8 +299,8 @@ export default function Home() {
                 </Link>
               </div>
 
-              {/* Right — mock UI preview */}
-              <div className="w-full lg:w-96 lg:flex-shrink-0">
+              {/* Right — mock UI preview — hidden on mobile */}
+              <div className="hidden sm:block w-full lg:w-96 lg:flex-shrink-0">
                 <div className="w-full bg-zinc-900/80 border border-white/10 rounded-xl overflow-hidden shadow-2xl">
                   {/* Header bar */}
                   <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-zinc-900">
