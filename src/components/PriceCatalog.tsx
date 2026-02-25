@@ -265,26 +265,32 @@ function StudentBanner() {
                     <ChevronDown className="w-4 h-4 text-amber-400 flex-shrink-0" />
                 )}
             </button>
-            {expanded && (
-                <div className="mt-3 space-y-2 text-sm text-zinc-400 leading-relaxed">
-                    <p>
-                        Llena el formulario marcando{" "}
-                        <span className="text-amber-400 font-semibold">Soy estudiante</span>, envía
-                        tu solicitud y recibirás un botón directo de{" "}
-                        <span className="text-emerald-400 font-semibold">WhatsApp</span> con tu
-                        código de ticket. Solo manda uno de estos documentos por ese chat:
-                    </p>
-                    <ul className="list-disc list-inside space-y-1 text-zinc-500 text-xs">
-                        <li>Carga académica / horario del semestre actual</li>
-                        <li>Credencial o carnet escolar vigente</li>
-                        <li>Comprobante de inscripción oficial</li>
-                    </ul>
-                    <p className="text-xs text-zinc-600">
-                        El descuento se aplica una vez verificado el documento. Válido para
-                        cualquier nivel educativo.
-                    </p>
+            {/* Grid-rows trick: smooth height animation without JS measurement */}
+            <div
+                className="grid overflow-hidden transition-all duration-300 ease-out"
+                style={{ gridTemplateRows: expanded ? "1fr" : "0fr" }}
+            >
+                <div className="min-h-0">
+                    <div className="mt-3 space-y-2 text-sm text-zinc-400 leading-relaxed">
+                        <p>
+                            Llena el formulario marcando{" "}
+                            <span className="text-amber-400 font-semibold">Soy estudiante</span>, envía
+                            tu solicitud y recibirás un botón directo de{" "}
+                            <span className="text-emerald-400 font-semibold">WhatsApp</span> con tu
+                            código de ticket. Solo manda uno de estos documentos por ese chat:
+                        </p>
+                        <ul className="list-disc list-inside space-y-1 text-zinc-500 text-xs">
+                            <li>Carga académica / horario del semestre actual</li>
+                            <li>Credencial o carnet escolar vigente</li>
+                            <li>Comprobante de inscripción oficial</li>
+                        </ul>
+                        <p className="text-xs text-zinc-600">
+                            El descuento se aplica una vez verificado el documento. Válido para
+                            cualquier nivel educativo.
+                        </p>
+                    </div>
                 </div>
-            )}
+            </div>
         </div>
     );
 }
@@ -353,13 +359,20 @@ export default function PriceCatalog() {
                         </div>
                     </div>
 
-                    {/* Active discount badge */}
-                    {student && (
-                        <div className="mt-4 inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold px-3 py-1.5 rounded-full">
-                            <GraduationCap className="w-3.5 h-3.5" />
-                            Descuento estudiantil activo — $150 MXN de ahorro por servicio
-                        </div>
-                    )}
+                    {/* Active discount badge — always rendered, fades in/out */}
+                    <div
+                        className="mt-4 inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold px-3 py-1.5 rounded-full"
+                        style={{
+                            opacity: student ? 1 : 0,
+                            transform: student ? "translateY(0)" : "translateY(-4px)",
+                            pointerEvents: student ? "auto" : "none",
+                            visibility: student ? "visible" : "hidden",
+                            transition: "opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0.2s",
+                        }}
+                    >
+                        <GraduationCap className="w-3.5 h-3.5" />
+                        Descuento estudiantil activo — $150 MXN de ahorro por servicio
+                    </div>
                 </div>
 
                 {/* Grid: auto-fit — 1 col mobile · 2 col tablet · 3 col desktop */}

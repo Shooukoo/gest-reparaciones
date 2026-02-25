@@ -24,15 +24,34 @@ html {
 ::-webkit-scrollbar-track { background: #09090b; }
 ::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 3px; }
 
+/* ── Fade up: used for modals and one-shot entrances ── */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(24px); }
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-in-up {
-  animation: fadeInUp 0.5s ease forwards;
+  animation: fadeInUp 0.25s ease-out both;
 }
 
-/* Noise texture overlay */
+/* ── Simple fade: used for backdrop overlays ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out both;
+}
+
+/* ── Mobile menu slide-in (defined globally to avoid re-injection flicker) ── */
+@keyframes mobileMenuIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-mobile-menu-in {
+  animation: mobileMenuIn 0.18s ease-out both;
+}
+
+/* ── Noise texture overlay ── */
 body::before {
   content: '';
   position: fixed;

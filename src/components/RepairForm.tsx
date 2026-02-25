@@ -122,7 +122,7 @@ function TicketCodeModal({
 
     return (
         <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in"
             onClick={onClose}
         >
             <div
@@ -369,16 +369,22 @@ export default function RepairForm() {
                         </div>
                     </label>
 
-                    {form.esEstudiante && (
-                        <div className="flex items-start gap-2 text-xs text-zinc-500 pt-1">
-                            <Info className="w-3.5 h-3.5 text-amber-500/70 flex-shrink-0 mt-0.5" />
-                            <p>
-                                Al enviar tu solicitud recibirás un enlace de WhatsApp para mandar tu{" "}
-                                <span className="text-zinc-300">carga académica, credencial o comprobante de inscripción</span>.
-                                El descuento se aplica tras verificar el documento.
-                            </p>
+                    {/* Grid-rows trick for smooth height animation */}
+                    <div
+                        className="grid overflow-hidden transition-all duration-250 ease-out"
+                        style={{ gridTemplateRows: form.esEstudiante ? "1fr" : "0fr" }}
+                    >
+                        <div className="min-h-0">
+                            <div className="flex items-start gap-2 text-xs text-zinc-500 pt-1">
+                                <Info className="w-3.5 h-3.5 text-amber-500/70 flex-shrink-0 mt-0.5" />
+                                <p>
+                                    Al enviar tu solicitud recibirás un enlace de WhatsApp para mandar tu{" "}
+                                    <span className="text-zinc-300">carga académica, credencial o comprobante de inscripción</span>.
+                                    El descuento se aplica tras verificar el documento.
+                                </p>
+                            </div>
                         </div>
-                    )}
+                    </div>
                 </div>
 
                 <button

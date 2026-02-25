@@ -75,31 +75,39 @@ function DropdownMenu({
                 />
             </button>
 
-            {open && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-zinc-900 border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-50">
-                    {/* Main link */}
+            {/* Always rendered — shown/hidden via CSS transitions, no remount flicker */}
+            <div
+                className="absolute top-full left-0 mt-2 w-48 bg-zinc-900 border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-50"
+                style={{
+                    opacity: open ? 1 : 0,
+                    transform: open ? "translateY(0) scale(1)" : "translateY(-6px) scale(0.97)",
+                    pointerEvents: open ? "auto" : "none",
+                    visibility: open ? "visible" : "hidden",
+                    transition: "opacity 0.18s ease-out, transform 0.18s ease-out, visibility 0.18s",
+                }}
+            >
+                {/* Main link */}
+                <Link
+                    href={href}
+                    onClick={() => setOpen(false)}
+                    className="flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-zinc-300 hover:text-white hover:bg-white/5 transition-colors border-b border-white/8"
+                >
+                    Ir a {label}
+                    <ChevronDown className="w-3 h-3 -rotate-90 ml-auto" />
+                </Link>
+                {/* Sub-links */}
+                {links.map(({ label: lbl, href: lhref, icon: LIcon }) => (
                     <Link
-                        href={href}
+                        key={lhref}
+                        href={lhref}
                         onClick={() => setOpen(false)}
-                        className="flex items-center gap-2 px-4 py-2.5 text-xs font-bold text-zinc-300 hover:text-white hover:bg-white/5 transition-colors border-b border-white/8"
+                        className="flex items-center gap-2.5 px-4 py-2.5 text-xs text-zinc-400 hover:text-white hover:bg-white/5 transition-colors"
                     >
-                        Ir a {label}
-                        <ChevronDown className="w-3 h-3 -rotate-90 ml-auto" />
+                        <LIcon className="w-3.5 h-3.5 text-zinc-600" />
+                        {lbl}
                     </Link>
-                    {/* Sub-links */}
-                    {links.map(({ label: lbl, href: lhref, icon: LIcon }) => (
-                        <Link
-                            key={lhref}
-                            href={lhref}
-                            onClick={() => setOpen(false)}
-                            className="flex items-center gap-2.5 px-4 py-2.5 text-xs text-zinc-400 hover:text-white hover:bg-white/5 transition-colors"
-                        >
-                            <LIcon className="w-3.5 h-3.5 text-zinc-600" />
-                            {lbl}
-                        </Link>
-                    ))}
-                </div>
-            )}
+                ))}
+            </div>
         </div>
     );
 }
@@ -169,20 +177,9 @@ export default function Navbar() {
                     </button>
                 </div>
 
-                {/* Mobile menu */}
+                {/* Mobile menu — uses global CSS class, no inline <style> re-injection */}
                 {isOpen && (
-                    <div
-                        className="md:hidden pb-4 pt-2 flex flex-col gap-1 border-t border-white/5 mt-1"
-                        style={{
-                            animation: "mobileMenuIn 0.18s ease-out both",
-                        }}
-                    >
-                        <style>{`
-                          @keyframes mobileMenuIn {
-                            from { opacity: 0; transform: translateY(-6px); }
-                            to   { opacity: 1; transform: translateY(0); }
-                          }
-                        `}</style>
+                    <div className="md:hidden pb-4 pt-2 flex flex-col gap-1 border-t border-white/5 mt-1 animate-mobile-menu-in">
                         {NAV_LINKS.map((link) => (
                             <a
                                 key={link.href}
@@ -204,28 +201,34 @@ export default function Navbar() {
                             <span className="ml-1 text-[10px] font-bold bg-emerald-500 text-white px-1.5 py-0.5 rounded-full leading-none">NEW</span>
                             <ChevronDown className={`w-3.5 h-3.5 ml-auto transition-transform duration-200 ${mobileAhorros ? "rotate-180" : ""}`} />
                         </button>
-                        {mobileAhorros && (
-                            <div className="flex flex-col gap-0.5 pl-4 pb-1">
-                                <Link
-                                    href="/ahorros"
-                                    onClick={() => setIsOpen(false)}
-                                    className="text-xs text-emerald-400 font-semibold px-3 py-2 rounded-lg hover:bg-white/5 transition-colors"
-                                >
-                                    Ir a Ahorros →
-                                </Link>
-                                {AHORROS_LINKS.map(({ label, href, icon: Icon }) => (
+                        {/* Accordion content — grid-rows trick for smooth height animation */}
+                        <div
+                            className="grid overflow-hidden transition-all duration-200 ease-out"
+                            style={{ gridTemplateRows: mobileAhorros ? "1fr" : "0fr" }}
+                        >
+                            <div className="min-h-0">
+                                <div className="flex flex-col gap-0.5 pl-4 pb-1 pt-0.5">
                                     <Link
-                                        key={href}
-                                        href={href}
+                                        href="/ahorros"
                                         onClick={() => setIsOpen(false)}
-                                        className="flex items-center gap-2 text-xs text-zinc-400 hover:text-white px-3 py-2 rounded-lg hover:bg-white/5 transition-colors"
+                                        className="text-xs text-emerald-400 font-semibold px-3 py-2 rounded-lg hover:bg-white/5 transition-colors"
                                     >
-                                        <Icon className="w-3.5 h-3.5 text-zinc-600" />
-                                        {label}
+                                        Ir a Ahorros →
                                     </Link>
-                                ))}
+                                    {AHORROS_LINKS.map(({ label, href, icon: Icon }) => (
+                                        <Link
+                                            key={href}
+                                            href={href}
+                                            onClick={() => setIsOpen(false)}
+                                            className="flex items-center gap-2 text-xs text-zinc-400 hover:text-white px-3 py-2 rounded-lg hover:bg-white/5 transition-colors"
+                                        >
+                                            <Icon className="w-3.5 h-3.5 text-zinc-600" />
+                                            {label}
+                                        </Link>
+                                    ))}
+                                </div>
                             </div>
-                        )}
+                        </div>
 
                         {/* Catálogo mobile accordion */}
                         <button
@@ -236,28 +239,34 @@ export default function Navbar() {
                             Portfolio
                             <ChevronDown className={`w-3.5 h-3.5 ml-auto transition-transform duration-200 ${mobileCatalogo ? "rotate-180" : ""}`} />
                         </button>
-                        {mobileCatalogo && (
-                            <div className="flex flex-col gap-0.5 pl-4 pb-1">
-                                <Link
-                                    href="/catalogo"
-                                    onClick={() => setIsOpen(false)}
-                                    className="text-xs text-amber-400 font-semibold px-3 py-2 rounded-lg hover:bg-white/5 transition-colors"
-                                >
-                                    Ir a Portfolio →
-                                </Link>
-                                {CATALOGO_LINKS.map(({ label, href, icon: Icon }) => (
+                        {/* Accordion content */}
+                        <div
+                            className="grid overflow-hidden transition-all duration-200 ease-out"
+                            style={{ gridTemplateRows: mobileCatalogo ? "1fr" : "0fr" }}
+                        >
+                            <div className="min-h-0">
+                                <div className="flex flex-col gap-0.5 pl-4 pb-1 pt-0.5">
                                     <Link
-                                        key={href}
-                                        href={href}
+                                        href="/catalogo"
                                         onClick={() => setIsOpen(false)}
-                                        className="flex items-center gap-2 text-xs text-zinc-400 hover:text-white px-3 py-2 rounded-lg hover:bg-white/5 transition-colors"
+                                        className="text-xs text-amber-400 font-semibold px-3 py-2 rounded-lg hover:bg-white/5 transition-colors"
                                     >
-                                        <Icon className="w-3.5 h-3.5 text-zinc-600" />
-                                        {label}
+                                        Ir a Portfolio →
                                     </Link>
-                                ))}
+                                    {CATALOGO_LINKS.map(({ label, href, icon: Icon }) => (
+                                        <Link
+                                            key={href}
+                                            href={href}
+                                            onClick={() => setIsOpen(false)}
+                                            className="flex items-center gap-2 text-xs text-zinc-400 hover:text-white px-3 py-2 rounded-lg hover:bg-white/5 transition-colors"
+                                        >
+                                            <Icon className="w-3.5 h-3.5 text-zinc-600" />
+                                            {label}
+                                        </Link>
+                                    ))}
+                                </div>
                             </div>
-                        )}
+                        </div>
 
                         <Link
                             href="/dashboard"
