@@ -1,24 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "/ahorros/(.*)",
-      "destination": "https://ahorros-personales.vercel.app/$1"
-    },
-    {
-      "source": "/ahorros",
-      "destination": "https://ahorros-personales.vercel.app"
+      "source": "/ahorros/:path*",
+      "destination": "https://ahorros-personales.vercel.app/ahorros/:path*"
     },
     {
       "source": "/catalogo/:path*",
       "destination": "https://catalogo-servicios-web.vercel.app/catalogo/:path*"
-    },
-    {
-      "source": "/catalogo",
-      "destination": "https://catalogo-servicios-web.vercel.app/catalogo"
-    },
-    {
-      "source": "/((?!ahorros|catalogo).*)",
-      "destination": "/$1"
     }
   ]
 }
