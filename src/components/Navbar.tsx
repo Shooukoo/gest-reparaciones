@@ -162,7 +162,7 @@ export default function Navbar() {
                     {/* Mobile toggle */}
                     <button
                         onClick={() => setIsOpen(!isOpen)}
-                        className="md:hidden text-zinc-400 hover:text-white transition-colors"
+                        className="md:hidden p-3 -mr-3 text-zinc-400 hover:text-white transition-colors rounded-lg hover:bg-white/5"
                         aria-label="Toggle menu"
                     >
                         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -171,13 +171,24 @@ export default function Navbar() {
 
                 {/* Mobile menu */}
                 {isOpen && (
-                    <div className="md:hidden pb-4 pt-2 flex flex-col gap-1 border-t border-white/5 mt-1">
+                    <div
+                        className="md:hidden pb-4 pt-2 flex flex-col gap-1 border-t border-white/5 mt-1"
+                        style={{
+                            animation: "mobileMenuIn 0.18s ease-out both",
+                        }}
+                    >
+                        <style>{`
+                          @keyframes mobileMenuIn {
+                            from { opacity: 0; transform: translateY(-6px); }
+                            to   { opacity: 1; transform: translateY(0); }
+                          }
+                        `}</style>
                         {NAV_LINKS.map((link) => (
                             <a
                                 key={link.href}
                                 href={link.href}
                                 onClick={() => setIsOpen(false)}
-                                className="text-zinc-400 hover:text-white font-medium py-2 px-3 rounded-lg hover:bg-white/5 transition-colors text-sm"
+                                className="flex items-center text-zinc-400 hover:text-white font-medium min-h-[44px] px-3 rounded-lg hover:bg-white/5 transition-colors text-sm"
                             >
                                 {link.label}
                             </a>

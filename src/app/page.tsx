@@ -85,13 +85,13 @@ export default function Home() {
               Servicio Técnico Disponible
             </span>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-white leading-tight tracking-tight mb-4">
+            <h1 className="text-[clamp(2rem,6vw,4.5rem)] font-black text-white leading-tight tracking-tight mb-4">
               Un Ingeniero{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-violet-300">
                 Más
               </span>
             </h1>
-            <p className="text-xl sm:text-2xl lg:text-3xl text-zinc-400 font-light mb-6">
+            <p className="text-[clamp(1.1rem,3vw,1.875rem)] text-zinc-400 font-light mb-6">
               Para resolver lo que sea.
             </p>
 
@@ -135,7 +135,7 @@ export default function Home() {
       {/* ── TRUST BAR ──────────────────────────────── */}
       <section className="border-y border-white/5 bg-zinc-900/50 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-8 text-xs sm:text-sm font-medium text-zinc-400">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-3 sm:gap-8 text-xs sm:text-sm font-medium text-zinc-400">
             {[
               { icon: ShieldCheck, label: "Garantía en reparaciones" },
               { icon: Zap, label: "Diagnóstico en 24h" },
@@ -374,7 +374,7 @@ export default function Home() {
             <ShieldCheck className="w-3.5 h-3.5" />
             Garantías
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4">
+          <h2 className="text-[clamp(1.75rem,5vw,3rem)] font-black text-white mb-4">
             Tu tranquilidad,{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-violet-300">
               garantizada

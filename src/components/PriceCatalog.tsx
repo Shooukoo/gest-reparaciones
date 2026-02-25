@@ -362,8 +362,8 @@ export default function PriceCatalog() {
                     )}
                 </div>
 
-                {/* Grid: 3 columns on desktop */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Grid: auto-fit — 1 col mobile · 2 col tablet · 3 col desktop */}
+                <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))" }}>
 
                     {/* ── Col 1: Servicios en Cómputo ── */}
                     <div className="bg-zinc-900/60 border border-white/8 rounded-2xl p-6">
