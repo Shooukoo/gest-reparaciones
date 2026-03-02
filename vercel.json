@@ -5,8 +5,12 @@
       "destination": "https://ahorros-personales.vercel.app/ahorros/:path*"
     },
     {
-      "source": "/catalogo/:path*",
-      "destination": "https://catalogo-servicios-web.vercel.app/catalogo/:path*"
+      "source": "/reparaciones/:path*",
+      "destination": "https://gest-reparaciones.vercel.app/reparaciones/:path*"
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://catalogo-servicios-web.vercel.app/:path*"
     }
   ]
 }
