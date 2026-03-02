@@ -22,12 +22,11 @@ const AHORROS_LINKS = [
     { label: "Simulador", href: "/ahorros#simulador", icon: Calculator },
 ];
 
-// Portfolio is now at the root domain (catalogo-servicios-web)
 const CATALOGO_LINKS = [
-    { label: "Servicios", href: "https://uningenieromas.vercel.app/#servicios", icon: Wrench },
-    { label: "Automatizaciones", href: "https://uningenieromas.vercel.app/#automatizaciones", icon: Layers },
-    { label: "Proyectos", href: "https://uningenieromas.vercel.app/#proyectos", icon: Briefcase },
-    { label: "Contacto", href: "https://uningenieromas.vercel.app/#contacto", icon: Mail },
+    { label: "Proyectos", href: "/catalogo#proyectos", icon: Briefcase },
+    { label: "Stack", href: "/catalogo#stack", icon: Layers },
+    { label: "Servicios", href: "/catalogo#servicios", icon: Wrench },
+    { label: "Contacto", href: "/catalogo#contacto", icon: Mail },
 ];
 
 function DropdownMenu({
@@ -150,10 +149,10 @@ export default function Navbar() {
                             accentClass="bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 hover:border-emerald-400/60 text-emerald-400 hover:text-emerald-300"
                         />
 
-                        {/* Catálogo dropdown — now at root */}
+                        {/* Catálogo dropdown */}
                         <DropdownMenu
                             label="Portfolio"
-                            href="https://uningenieromas.vercel.app"
+                            href="/catalogo"
                             links={CATALOGO_LINKS}
                             icon={Briefcase}
                             accentClass="bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 hover:border-amber-400/60 text-amber-400 hover:text-amber-300"
@@ -248,7 +247,7 @@ export default function Navbar() {
                             <div className="min-h-0">
                                 <div className="flex flex-col gap-0.5 pl-4 pb-1 pt-0.5">
                                     <Link
-                                        href="https://uningenieromas.vercel.app"
+                                        href="/catalogo"
                                         onClick={() => setIsOpen(false)}
                                         className="text-xs text-amber-400 font-semibold px-3 py-2 rounded-lg hover:bg-white/5 transition-colors"
                                     >
