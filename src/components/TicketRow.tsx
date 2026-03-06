@@ -28,6 +28,21 @@ export default function TicketRow({ ticket, index }: TicketRowProps) {
         try {
             await updateTicketStatus(ticket.id, nuevoEstado);
             toast.success(`Estado → "${nuevoEstado}"`);
+
+            // Notificación por correo (no bloquea si falla)
+            fetch("/api/send-email", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    tipo: "cambio_estado",
+                    ticketCode: ticket.id,
+                    cliente: ticket.clienteNombre,
+                    dispositivo: ticket.tipoDispositivo,
+                    servicio: ticket.tipoServicio,
+                    whatsapp: ticket.whatsapp,
+                    nuevoEstado,
+                }),
+            }).catch((e) => console.warn("[email] No se pudo enviar el aviso:", e));
         } catch {
             toast.error("Error al actualizar el estado.");
         } finally {

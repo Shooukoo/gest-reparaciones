@@ -234,6 +234,21 @@ export default function RepairForm() {
             // Cooldown anti-spam: 30 s
             setCooldown(true);
             setTimeout(() => setCooldown(false), 30_000);
+
+            // Notificación por correo (no bloquea al usuario si falla)
+            fetch("/api/send-email", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    tipo: "nuevo_ticket",
+                    ticketCode: code,
+                    cliente: form.clienteNombre,
+                    dispositivo: form.tipoDispositivo,
+                    servicio: form.tipoServicio,
+                    descripcion: form.descripcionProblema,
+                    whatsapp: form.whatsapp,
+                }),
+            }).catch((e) => console.warn("[email] No se pudo enviar el aviso:", e));
         } catch (err) {
             console.error(err);
             toast.error("Error al enviar. Verifica tu conexión.");
