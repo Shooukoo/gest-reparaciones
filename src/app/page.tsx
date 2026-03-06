@@ -204,7 +204,7 @@ export default function Home() {
                 </div>
 
                 <Link
-                  href="/catalogo"
+                  href="/portafolio"
                   className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-400 hover:from-amber-400 hover:to-orange-300 text-black font-black px-7 py-4 rounded-xl transition-all duration-200 shadow-xl shadow-amber-900/50 hover:-translate-y-1 hover:shadow-amber-800/60 text-sm sm:text-base"
                 >
                   Ver portfolio

@@ -23,10 +23,10 @@ const AHORROS_LINKS = [
 ];
 
 const CATALOGO_LINKS = [
-    { label: "Proyectos", href: "/catalogo#proyectos", icon: Briefcase },
-    { label: "Stack", href: "/catalogo#stack", icon: Layers },
-    { label: "Servicios", href: "/catalogo#servicios", icon: Wrench },
-    { label: "Contacto", href: "/catalogo#contacto", icon: Mail },
+    { label: "Proyectos", href: "/portafolio#proyectos", icon: Briefcase },
+    { label: "Stack", href: "/portafolio#stack", icon: Layers },
+    { label: "Servicios", href: "/portafolio#servicios", icon: Wrench },
+    { label: "Contacto", href: "/portafolio#contacto", icon: Mail },
 ];
 
 function DropdownMenu({
@@ -152,7 +152,7 @@ export default function Navbar() {
                         {/* Catálogo dropdown */}
                         <DropdownMenu
                             label="Portfolio"
-                            href="/catalogo"
+                            href="/portafolio"
                             links={CATALOGO_LINKS}
                             icon={Briefcase}
                             accentClass="bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 hover:border-amber-400/60 text-amber-400 hover:text-amber-300"
@@ -247,7 +247,7 @@ export default function Navbar() {
                             <div className="min-h-0">
                                 <div className="flex flex-col gap-0.5 pl-4 pb-1 pt-0.5">
                                     <Link
-                                        href="/catalogo"
+                                        href="/portafolio"
                                         onClick={() => setIsOpen(false)}
                                         className="text-xs text-amber-400 font-semibold px-3 py-2 rounded-lg hover:bg-white/5 transition-colors"
                                     >
