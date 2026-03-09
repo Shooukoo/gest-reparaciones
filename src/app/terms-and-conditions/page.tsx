@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     description:
         "Conoce los términos y condiciones del servicio técnico de Un Ingeniero Más: garantías, pagos, tiempos de entrega y políticas de reparación.",
     robots: { index: true, follow: true },
-    alternates: { canonical: "https://uningenieromas.vercel.app/terminos-y-condiciones" },
+    alternates: { canonical: "https://uningenieromas.vercel.app/terms-and-conditions" },
 };
 
 const SECTIONS = [

@@ -75,7 +75,7 @@ export default function Footer() {
                     <span>© {year} Un Ingeniero Más. Todos los derechos reservados.</span>
                     <div className="flex items-center gap-4">
                         <Link
-                            href="/terminos-y-condiciones"
+                            href="/terms-and-conditions"
                             className="hover:text-purple-400 transition-colors"
                         >
                             Términos y Condiciones
