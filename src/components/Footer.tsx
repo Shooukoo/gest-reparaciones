@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Instagram, MessageCircle } from "lucide-react";
 
 export default function Footer() {
@@ -58,7 +59,7 @@ export default function Footer() {
                                 WhatsApp
                             </a>
                             <a
-                                href="https://instagram.com/uningenieromas_"
+                                href="https://instagram.com/uningenieromás_"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-2 text-sm text-zinc-500 hover:text-purple-400 transition-colors"
@@ -72,7 +73,15 @@ export default function Footer() {
 
                 <div className="border-t border-white/5 pt-6 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-zinc-600">
                     <span>© {year} Un Ingeniero Más. Todos los derechos reservados.</span>
-                    <span className="text-purple-500/60">uningenieromás.com</span>
+                    <div className="flex items-center gap-4">
+                        <Link
+                            href="/terminos-y-condiciones"
+                            className="hover:text-purple-400 transition-colors"
+                        >
+                            Términos y Condiciones
+                        </Link>
+                        <span className="text-purple-500/60">uningenieromás.com</span>
+                    </div>
                 </div>
             </div>
         </footer>
