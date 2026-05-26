@@ -20,14 +20,12 @@ const jsonLd = {
   description:
     "Servicio técnico profesional: reparación de laptops, consolas, celulares e instalación de software.",
   url: "https://uningenieromás.com",
-  telephone: "+52353-000-0000",
   priceRange: "$$",
   openingHours: "Mo-Sa 09:00-19:00",
   address: {
     "@type": "PostalAddress",
     addressCountry: "MX",
   },
-  sameAs: ["https://wa.me/52353000000"],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Servicios Técnicos",

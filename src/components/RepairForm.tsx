@@ -4,10 +4,8 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { addTicket } from "@/lib/firestoreService";
 import { NuevoTicket, TipoDispositivo, TipoServicio } from "@/types/ticket";
-import { Send, Loader2, Copy, Check, X, Ticket, GraduationCap, Info, MessageCircle } from "lucide-react";
+import { Send, Loader2, Copy, Check, X, Ticket, GraduationCap, Info } from "lucide-react";
 import CustomSelect from "./CustomSelect";
-
-const WA_NUMBER = "523531373007";
 
 const DISPOSITIVOS: TipoDispositivo[] = [
     "Laptop",
@@ -115,11 +113,6 @@ function TicketCodeModal({
         });
     }
 
-    const waMessage = encodeURIComponent(
-        `Hola, acabo de enviar una solicitud de servicio con el código *${code}*. Soy estudiante y quiero aplicar el descuento. Te adjunto mi documento académico.`
-    );
-    const waLink = `https://wa.me/${WA_NUMBER}?text=${waMessage}`;
-
     return (
         <div
             className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in"
@@ -168,17 +161,11 @@ function TicketCodeModal({
                     </button>
                 </div>
 
-                {/* CTA WhatsApp para estudiante */}
+                {/* Aviso descuento estudiantil */}
                 {isStudent && (
-                    <a
-                        href={waLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 w-full bg-emerald-600/15 hover:bg-emerald-600/25 border border-emerald-500/30 text-emerald-400 font-semibold text-sm py-3 px-4 rounded-xl transition-all duration-200 mb-4"
-                    >
-                        <MessageCircle className="w-4 h-4 flex-shrink-0" />
-                        Enviar documento por WhatsApp
-                    </a>
+                    <p className="text-xs text-amber-400/80 bg-amber-500/10 border border-amber-500/20 rounded-xl px-4 py-3 mb-4">
+                        Te contactaremos para verificar tu documento académico y aplicar el descuento.
+                    </p>
                 )}
 
                 <p className="text-zinc-600 text-xs mb-6">
@@ -393,9 +380,9 @@ export default function RepairForm() {
                             <div className="flex items-start gap-2 text-xs text-zinc-500 pt-1">
                                 <Info className="w-3.5 h-3.5 text-amber-500/70 flex-shrink-0 mt-0.5" />
                                 <p>
-                                    Al enviar tu solicitud recibirás un enlace de WhatsApp para mandar tu{" "}
+                                    Necesitamos verificar tu{" "}
                                     <span className="text-zinc-300">carga académica, credencial o comprobante de inscripción</span>.
-                                    El descuento se aplica tras verificar el documento.
+                                    Te contactaremos para solicitarlo. El descuento se aplica tras la verificación.
                                 </p>
                             </div>
                         </div>

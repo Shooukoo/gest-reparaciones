@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Instagram, MessageCircle } from "lucide-react";
+import { Instagram } from "lucide-react";
 
 export default function Footer() {
     const year = new Date().getFullYear();
@@ -49,15 +49,12 @@ export default function Footer() {
                     <div>
                         <h4 className="text-white font-semibold mb-3 text-sm">Contacto</h4>
                         <div className="flex flex-col gap-3">
-                            <a
-                                href="https://wa.me/523531373007"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                            <Link
+                                href="/#formulario"
                                 className="flex items-center gap-2 text-sm text-zinc-500 hover:text-purple-400 transition-colors"
                             >
-                                <MessageCircle className="w-4 h-4" />
-                                WhatsApp
-                            </a>
+                                Solicitar servicio
+                            </Link>
                             <a
                                 href="https://instagram.com/uningenieromás_"
                                 target="_blank"

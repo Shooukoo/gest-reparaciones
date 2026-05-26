@@ -64,7 +64,7 @@ const SECTIONS = [
         icon: Phone,
         title: "6. Comunicación y contacto",
         content: [
-            "El medio principal de comunicación es WhatsApp al número +52 353 137 3007.",
+            "El medio principal de comunicación es WhatsApp (enlace disponible en la página de inicio).",
             "Las consultas realizadas fuera del horario de atención (lunes a sábado, 9:00 am – 8:00 pm) serán atendidas el siguiente día hábil.",
             "Al aceptar el servicio, el cliente confirma que ha leído y acepta los presentes términos y condiciones.",
         ],
@@ -132,14 +132,12 @@ export default function TerminosYCondicionesPage() {
                 <div className="mt-12 p-6 rounded-2xl border border-purple-500/20 bg-purple-500/5 text-center">
                     <p className="text-zinc-400 text-sm leading-relaxed">
                         ¿Tienes alguna pregunta sobre estos términos?{" "}
-                        <a
-                            href="https://wa.me/523531373007"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <Link
+                            href="/#formulario"
                             className="text-purple-400 hover:text-purple-300 font-medium transition-colors"
                         >
-                            Contáctanos por WhatsApp
-                        </a>{" "}
+                            Envíanos tu solicitud
+                        </Link>{" "}
                         y con gusto te respondemos.
                     </p>
                 </div>
